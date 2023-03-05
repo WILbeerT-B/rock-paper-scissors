@@ -1,3 +1,6 @@
+let playerCount = 0, computerCount = 0;
+
+//get the random choice of the computer
 function getComputerChoice() {
     let computerChoice = "";
     const randomNum = Math.floor(Math.random() * 3);
@@ -11,33 +14,66 @@ function getComputerChoice() {
     console.log(computerChoice);
     return computerChoice;
 }
-
+//play a one round game and determines the winner of the round
 function playRound(playerSelection, computerSelection) {
-    /* if((playerSelection == "rock") && (computerSelection == "Rock") ||
-       (playerSelection == "paper") && (computerSelection == "Paper") ||
-       (playerSelection == "scissors") && (computerSelection == "Scissors")) {
-            return "Game is EVEN!!!" */
-    
     //Player wins
     if((playerSelection == "rock") && (computerSelection == "Scissors")){
-        return "You win! Rock beats Scissors"   
+        playerCount++;
+        return "You win this round! Rock beats Scissors";
+        
     } else if((playerSelection == "paper") && (computerSelection == "Rock")){
-        return "You win! Paper beats Rock"
+        playerCount++;
+        return "You got this round! Paper beats Rock";
+        
     } else if((playerSelection == "scissors") && (computerSelection == "Paper")){
-        return "You win! Scissors beats Paper"
-    
+        playerCount++;
+        return "You got the round! Scissors beats Paper";
+        
     //Computer wins
     } else if((playerSelection == "scissors") && (computerSelection == "Rock")){
-        return "You lose! Rock beats Scissors!"
+        computerCount++;
+        return "You lose this round! Rock beats Scissors!";
+        
     } else if((playerSelection == "rock") && (computerSelection == "Paper")){
-        return "You lose! Paper beats rock!"
+        computerCount++;
+        return "Computer win this round! Paper beats rock!";
+        
     } else if((playerSelection == "paper") && (computerSelection == "Scissors")){
-        return "You lose! Scissor beats paper!"
+        computerCount++;
+        return "You lose the round! Scissor beats paper!";
+        
     } else {
-        return "Game is EVEN!"
+        return "Round is EVEN!";
     }
 }
 
-const playerSelection = "scissors";
-const computerSelection = getComputerChoice();
-console.log(playRound(playerSelection, computerSelection));
+//get the scores of the player and computer
+function getScoreCount() {
+    return console.log(`Player score: ${playerCount}, Computer score: ${computerCount}`);
+}
+
+//determine the winner of the game
+function getWinner() {
+    if(playerCount > computerCount) {
+        return console.log("Player wins the game!");
+    } else if(playerCount<computerCount){
+        return console.log("Computer wins the game!");
+    } else {
+        return console.log("Game was even!")
+    }
+}
+
+//call the playRound function and play a 5 round game
+function game() {
+    for(let i = 1; i <= 5; i++) {
+        const playerSelection = prompt("Rock, Paper or Scissors?");
+        const computerSelection = getComputerChoice();
+        console.log(playRound(playerSelection, computerSelection));
+        getScoreCount();
+    }
+}
+
+
+game();
+getWinner();
+
